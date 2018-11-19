@@ -1,3 +1,4 @@
+
 import argparse
 from tqdm import tqdm
 import os
@@ -43,7 +44,8 @@ output_file = open(args.outfile, "w")
 output_file.write("Id,Category\n")
 for f in tqdm(os.listdir(test_dir)):
     if 'jpg' in f:
-        data = data_transforms(pil_loader(test_dir + '/' + f))
+        data = data_transforms["validation"](pil_loader(test_dir + '/' + f))
+        #data = data_transforms(pil_loader(test_dir + '/' + f))
         data = data.view(1, data.size(0), data.size(1), data.size(2))
         if use_cuda:
             data = data.cuda()
@@ -55,5 +57,3 @@ output_file.close()
 
 print("Succesfully wrote " + args.outfile + ', you can upload this file to the kaggle competition website')
         
-
-
